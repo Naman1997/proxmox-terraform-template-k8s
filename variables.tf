@@ -57,7 +57,7 @@ variable "common_configs" {
     nameserver    = string
   })
   default = {
-    clone         = "{{CLONE_PATH}}}}"
+    clone         = "{{TEMPLATE_NAME}}}}"
     agent         = 1
     network_model = "e1000"
     disk_type     = "sata"
