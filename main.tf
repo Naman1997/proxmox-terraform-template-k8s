@@ -19,7 +19,9 @@ resource "proxmox_vm_qemu" "kmaster" {
   count                     = var.kmaster_count
   name                      = format("kmaster%s", count.index)
   desc                      = format("Master node in k8s cluster.")
-  iso                       = var.common_configs.iso
+  os_type                   = "cloud-init"
+  clone                     = var.common_configs.clone
+  full_clone                = true
   agent                     = var.common_configs.agent
   target_node               = var.kmaster_config.target_node
   onboot                    = var.kmaster_config.onboot
@@ -29,7 +31,8 @@ resource "proxmox_vm_qemu" "kmaster" {
   guest_agent_ready_timeout = 60
 
   network {
-    model = var.common_configs.network_model
+    model  = var.common_configs.network_model
+    bridge = "vmbr0"
   }
 
   disk {
@@ -38,6 +41,8 @@ resource "proxmox_vm_qemu" "kmaster" {
     size    = var.kmaster_config.disk_size
     ssd     = var.kmaster_config.disk_ssd
   }
+
+  nameserver = var.common_configs.nameserver
 }
 
 # Setting up kworker nodes
@@ -45,7 +50,9 @@ resource "proxmox_vm_qemu" "kworker" {
   count                     = var.kworker_count
   name                      = format("kworker%s", count.index)
   desc                      = format("Worker node in k8s cluster.")
-  iso                       = var.common_configs.iso
+  os_type                   = "cloud-init"
+  clone                     = var.common_configs.clone
+  full_clone                = true
   agent                     = var.common_configs.agent
   target_node               = var.kworker_config.target_node
   onboot                    = var.kworker_config.onboot
@@ -55,7 +62,8 @@ resource "proxmox_vm_qemu" "kworker" {
   guest_agent_ready_timeout = 60
 
   network {
-    model = var.common_configs.network_model
+    model  = var.common_configs.network_model
+    bridge = "vmbr0"
   }
 
   disk {
@@ -64,4 +72,6 @@ resource "proxmox_vm_qemu" "kworker" {
     size    = var.kworker_config.disk_size
     ssd     = var.kworker_config.disk_ssd
   }
+
+  nameserver = var.common_configs.nameserver
 }

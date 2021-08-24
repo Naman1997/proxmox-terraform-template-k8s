@@ -42,7 +42,7 @@ variable "kworker_config" {
     sockets      = 1
     cores        = 2
     disk_storage = "local-lvm"
-    disk_size    = "100G"
+    disk_size    = "50G"
     disk_ssd     = 1
   }
 }
@@ -50,16 +50,18 @@ variable "kworker_config" {
 variable "common_configs" {
   description = "Common configs between all nodes"
   type = object({
-    iso           = string
+    clone         = string
     agent         = number
     network_model = string
     disk_type     = string
+    nameserver    = string
   })
   default = {
-    iso           = "{{ISO_PATH}}}}"
-    agent         = 0
+    clone         = "{{CLONE_PATH}}}}"
+    agent         = 1
     network_model = "e1000"
     disk_type     = "sata"
+    nameserver    = "{{NAME_SERVER}}"
   }
 }
 
