@@ -8,9 +8,9 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url      = "https://{{IP_ADDRESS_PROXMOX}}:8006/api2/json"
-  pm_user         = "{{PROXMOX_USERNAME}}"
-  pm_password     = "{{PROXMOX_PASSWORD}}"
+  pm_api_url      = var.PROXMOX_API_ENDPOINT
+  pm_user         = var.PROXMOX_USERNAME
+  pm_password     = var.PROXMOX_PASSWORD
   pm_tls_insecure = true
 }
 
@@ -20,7 +20,7 @@ resource "proxmox_vm_qemu" "kmaster" {
   name                      = format("kmaster%s", count.index)
   desc                      = format("Master node in k8s cluster.")
   os_type                   = "cloud-init"
-  clone                     = var.common_configs.clone
+  clone                     = var.CLONE_TEMPLATE
   full_clone                = true
   agent                     = var.common_configs.agent
   target_node               = var.kmaster_config.target_node
@@ -29,20 +29,13 @@ resource "proxmox_vm_qemu" "kmaster" {
   sockets                   = var.kmaster_config.sockets
   cores                     = var.kmaster_config.cores
   guest_agent_ready_timeout = 60
+  nameserver                = var.common_configs.nameserver
 
   network {
     model  = var.common_configs.network_model
-    bridge = "vmbr0"
+    bridge = var.DEFAULT_BRIDGE
   }
 
-  disk {
-    type    = var.common_configs.disk_type
-    storage = var.kmaster_config.disk_storage
-    size    = var.kmaster_config.disk_size
-    ssd     = var.kmaster_config.disk_ssd
-  }
-
-  nameserver = var.common_configs.nameserver
 }
 
 # Setting up kworker nodes
@@ -51,7 +44,7 @@ resource "proxmox_vm_qemu" "kworker" {
   name                      = format("kworker%s", count.index)
   desc                      = format("Worker node in k8s cluster.")
   os_type                   = "cloud-init"
-  clone                     = var.common_configs.clone
+  clone                     = var.CLONE_TEMPLATE
   full_clone                = true
   agent                     = var.common_configs.agent
   target_node               = var.kworker_config.target_node
@@ -60,18 +53,35 @@ resource "proxmox_vm_qemu" "kworker" {
   sockets                   = var.kworker_config.sockets
   cores                     = var.kworker_config.cores
   guest_agent_ready_timeout = 60
+  nameserver                = var.common_configs.nameserver
 
   network {
     model  = var.common_configs.network_model
-    bridge = "vmbr0"
+    bridge = var.DEFAULT_BRIDGE
   }
 
-  disk {
-    type    = var.common_configs.disk_type
-    storage = var.kworker_config.disk_storage
-    size    = var.kworker_config.disk_size
-    ssd     = var.kworker_config.disk_ssd
-  }
+}
 
-  nameserver = var.common_configs.nameserver
+resource "local_file" "ansible_hosts" {
+
+  depends_on = [
+    proxmox_vm_qemu.kworker,
+    proxmox_vm_qemu.kmaster
+  ]
+
+  content = templatefile("hosts.tmpl",
+    {
+      node_map = merge(
+        zipmap(
+          tolist(proxmox_vm_qemu.kworker.*.ssh_host), tolist(proxmox_vm_qemu.kworker.*.name)
+        ),
+        zipmap(
+          tolist(proxmox_vm_qemu.kmaster.*.ssh_host), tolist(proxmox_vm_qemu.kmaster.*.name)
+        )
+      )
+      "ansible_port" = 22,
+      "ansible_user" = var.TEMPLATE_USERNAME
+    }
+  )
+  filename = "${path.module}/ansible/hosts"
 }

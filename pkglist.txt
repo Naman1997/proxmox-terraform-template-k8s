@@ -9,3 +9,4 @@ htop
 net-tools
 qemu-guest-agent
 cloud-guest-utils
+python

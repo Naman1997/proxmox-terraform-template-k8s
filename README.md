@@ -8,36 +8,30 @@ Make sure to read the [documentation](https://registry.terraform.io/providers/Te
 
 ## Important variables to update
 
-In the main.tf file :
-- IP_ADDRESS_PROXMOX: This is the IP address of your proxmox box.
-- PROXMOX_USERNAME: The username which you want terraform to use
-- PROXMOX_PASSWORD: Password for the user mentioned above
-
-
-In the variables.tf file:
-- CLONE_PATH: Name of the proxmox template that will be cloned to form the VMs.
-- NAME_SERVER: Nameserver that will be configured for your VMs.
-
-**CLONE_PATH should be present before proceed further**
-
-This is basically a VM where you have installed the following packages:
-- vim
-- git
-- inetutils
-- openssh
-- docker
-- nfs-utils
-- figlet
-- htop
-- net-tools
-- qemu-guest-agent
-- cloud-guest-utils
-
-Basically run this command in that VM before converting it to a template:
+All mandatory variables are put in a file named 'terraform.tfvars'.
+You can make this file by copying terraform.tfvars.example and updating the values in it. Also rename it to terraform.tfvars
 
 ```
-sudo pacman -S --needed - < pkglist.txt
+cp terraform.tfvars.example terraform.tfvars
+# Edit this file and save it
+vim terraform.tfvars
 ```
+Description for all vars in terraform.tfvars is available in 'variables.tf' file
+Apart from these you can you can also edit other variables in 'variables.tf' file.
+These variables are hard-coded in main.tf as I don't think most people would move away from these defaults. Please update main.tf if you need other defaults
+
+```
+<!-- Proxmox TLS check -->
+pm_tls_insecure = true
+<!-- Full cloning for all VMs -->
+full_clone = true
+<!-- This one is explained below in 'Extra configs' section -->
+guest_agent_ready_timeout = 60
+<!-- SSH port for all VMs -->
+ansible_port = 22,
+```
+
+**CLONE_TEMPLATE should be present before proceed further**
 
 Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template)
 
@@ -55,5 +49,15 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+This will also create an ansible inventory file. You can check if its formatted correctly by
+```
+ansible-inventory -v --list -i ansible/hosts
+```
+
+You can edit 'hosts.tmpl' if you prefer some other format.
+
 ## Post install steps
-Arch will ask you to reset the user password the first time you try to login.
+These steps will be manaual:
+- Reset user password if it expires
+- Upgrade VMs with `pacman -Syu`

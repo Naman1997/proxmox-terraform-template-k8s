@@ -2,66 +2,50 @@
 variable "kmaster_config" {
   description = "kmaster config"
   type = object({
-    target_node  = string
-    onboot       = bool
-    memory       = number
-    sockets      = number
-    cores        = number
-    disk_storage = string
-    disk_size    = string
-    disk_ssd     = number
+    target_node = string
+    onboot      = bool
+    memory      = number
+    sockets     = number
+    cores       = number
   })
   default = {
-    target_node  = "pve"
-    onboot       = false
-    memory       = 8192
-    sockets      = 1
-    cores        = 4
-    disk_storage = "local-lvm"
-    disk_size    = "100G"
-    disk_ssd     = 1
+    target_node = "pve"
+    onboot      = false
+    memory      = 8192
+    sockets     = 1
+    cores       = 4
   }
 }
 
 variable "kworker_config" {
   description = "kworker config"
   type = object({
-    target_node  = string
-    onboot       = bool
-    memory       = number
-    sockets      = number
-    cores        = number
-    disk_storage = string
-    disk_size    = string
-    disk_ssd     = number
+    target_node = string
+    onboot      = bool
+    memory      = number
+    sockets     = number
+    cores       = number
   })
   default = {
-    target_node  = "pve"
-    onboot       = false
-    memory       = 4096
-    sockets      = 1
-    cores        = 2
-    disk_storage = "local-lvm"
-    disk_size    = "50G"
-    disk_ssd     = 1
+    target_node = "pve"
+    onboot      = false
+    memory      = 4096
+    sockets     = 1
+    cores       = 2
   }
 }
 
 variable "common_configs" {
   description = "Common configs between all nodes"
   type = object({
-    clone         = string
     agent         = number
     network_model = string
     disk_type     = string
-    nameserver    = string
   })
   default = {
-    clone         = "{{TEMPLATE_NAME}}}}"
     agent         = 1
     network_model = "e1000"
     disk_type     = "sata"
-    nameserver    = "{{NAME_SERVER}}"
   }
 }
 
@@ -75,4 +59,42 @@ variable "kworker_count" {
   description = "Number of kworker nodes"
   type        = number
   default     = 2
+}
+
+variable "PROXMOX_API_ENDPOINT" {
+  description = "API endpoint for proxmox"
+  type        = string
+}
+
+variable "PROXMOX_USERNAME" {
+  description = "User name used to login proxmox"
+  type        = string
+  default     = "root@pam"
+}
+
+variable "PROXMOX_PASSWORD" {
+  description = "Password used to login proxmox"
+  type        = string
+}
+
+variable "DEFAULT_BRIDGE" {
+  description = "Bridge to use when creating VMs in proxmox"
+  type        = string
+  default     = "vmbr0"
+}
+
+variable "CLONE_TEMPLATE" {
+  description = "Name of your template"
+  type        = string
+}
+
+variable "TEMPLATE_USERNAME" {
+  description = "Username that's configured in your cloud-init template VM in proxmox"
+  type        = string
+}
+
+variable "NAMESERVER" {
+  description = "Default nameserver that you might want to configure for all your VMs"
+  type        = string
+  default     = "8.8.8.8"
 }
