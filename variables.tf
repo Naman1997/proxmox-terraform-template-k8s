@@ -69,7 +69,6 @@ variable "PROXMOX_API_ENDPOINT" {
 variable "PROXMOX_USERNAME" {
   description = "User name used to login proxmox"
   type        = string
-  default     = "root@pam"
 }
 
 variable "PROXMOX_PASSWORD" {
@@ -80,7 +79,6 @@ variable "PROXMOX_PASSWORD" {
 variable "DEFAULT_BRIDGE" {
   description = "Bridge to use when creating VMs in proxmox"
   type        = string
-  default     = "vmbr0"
 }
 
 variable "CLONE_TEMPLATE" {
@@ -96,5 +94,4 @@ variable "TEMPLATE_USERNAME" {
 variable "NAMESERVER" {
   description = "Default nameserver that you might want to configure for all your VMs"
   type        = string
-  default     = "8.8.8.8"
 }

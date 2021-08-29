@@ -29,7 +29,7 @@ resource "proxmox_vm_qemu" "kmaster" {
   sockets                   = var.kmaster_config.sockets
   cores                     = var.kmaster_config.cores
   guest_agent_ready_timeout = 60
-  nameserver                = var.common_configs.nameserver
+  nameserver                = var.NAMESERVER
 
   network {
     model  = var.common_configs.network_model
@@ -53,7 +53,7 @@ resource "proxmox_vm_qemu" "kworker" {
   sockets                   = var.kworker_config.sockets
   cores                     = var.kworker_config.cores
   guest_agent_ready_timeout = 60
-  nameserver                = var.common_configs.nameserver
+  nameserver                = var.NAMESERVER
 
   network {
     model  = var.common_configs.network_model
