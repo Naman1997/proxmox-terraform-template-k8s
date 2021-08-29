@@ -62,6 +62,6 @@ ansible-inventory -v --list -i ansible/hosts
 You can edit 'hosts.tmpl' if you prefer some other format.
 
 ## Post install steps
-These steps will be manaual:
+These steps will be manual:
 - Reset user password if it expires
 - Upgrade VMs with `pacman -Syu`
