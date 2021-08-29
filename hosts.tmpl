@@ -1,0 +1,4 @@
+[cluster]
+%{ for node_host, node_hostname in node_map ~}
+${node_hostname} ansible_host=${node_host} ansible_port=${ansible_port} ansible_user=${ansible_user}
+%{endfor}

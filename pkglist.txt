@@ -1,0 +1,12 @@
+vim
+git
+inetutils
+openssh
+docker
+nfs-utils
+figlet
+htop
+net-tools
+qemu-guest-agent
+cloud-guest-utils
+python
