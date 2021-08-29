@@ -1,8 +1,10 @@
-﻿# terraform-k8s-template
+﻿# proxmox-terraform-template-k8s
  
  [![Terraform](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml/badge.svg)](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml)
 
 Template for setting up VMs for a new cluster in a Proxmox box.
+
+Also creates a handy ansible inventory in ansible/hosts.
 
 This repo is using the telmate/proxmox provider for terraform.
 
