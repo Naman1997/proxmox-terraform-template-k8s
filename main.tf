@@ -30,6 +30,7 @@ resource "proxmox_vm_qemu" "kmaster" {
   cores                     = var.kmaster_config.cores
   guest_agent_ready_timeout = 60
   nameserver                = var.NAMESERVER
+  boot                      = "order=scsi0;ide2;net0"
 
   network {
     model  = var.common_configs.network_model
@@ -54,6 +55,7 @@ resource "proxmox_vm_qemu" "kworker" {
   cores                     = var.kworker_config.cores
   guest_agent_ready_timeout = 60
   nameserver                = var.NAMESERVER
+  boot                      = "order=scsi0;ide2;net0"
 
   network {
     model  = var.common_configs.network_model
