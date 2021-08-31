@@ -39,6 +39,10 @@ ansible_port = 22,
 
 Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template)
 
+You can also follow one of the guides below to create a template VM:
+- My [repo](https://github.com/Naman1997/arch-cloud-image) for setting up an arch cloud image
+- Telmate's [ISO builder](https://github.com/Telmate/terraform-ubuntu-proxmox-iso)
+
 ## Extra configs
 There are some params that are not mentioned in the docs. Look [here](https://github.com/Telmate/terraform-provider-proxmox/blob/master/proxmox/resource_vm_qemu.go) to learn more.
 
