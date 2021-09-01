@@ -73,17 +73,23 @@ resource "local_file" "ansible_hosts" {
 
   content = templatefile("hosts.tmpl",
     {
-      node_map = merge(
-        zipmap(
-          tolist(proxmox_vm_qemu.kworker.*.ssh_host), tolist(proxmox_vm_qemu.kworker.*.name)
-        ),
-        zipmap(
-          tolist(proxmox_vm_qemu.kmaster.*.ssh_host), tolist(proxmox_vm_qemu.kmaster.*.name)
-        )
-      )
+      node_map_masters = zipmap(
+        tolist(proxmox_vm_qemu.kmaster.*.ssh_host), tolist(proxmox_vm_qemu.kmaster.*.name)
+      ),
+      node_map_workers = zipmap(
+        tolist(proxmox_vm_qemu.kworker.*.ssh_host), tolist(proxmox_vm_qemu.kworker.*.name)
+      ),
       "ansible_port" = 22,
       "ansible_user" = var.TEMPLATE_USERNAME
     }
   )
   filename = "${path.module}/ansible/hosts"
+
+}
+
+output "ansible_inventory" {
+  depends_on = [
+    local_file.ansible_hosts
+  ]
+  value = local_file.ansible_hosts.content
 }
