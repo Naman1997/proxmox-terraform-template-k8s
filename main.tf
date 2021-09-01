@@ -64,7 +64,7 @@ resource "proxmox_vm_qemu" "kworker" {
 
 }
 
-resource "local_file" "ansible_hosts_masters" {
+resource "local_file" "ansible_hosts" {
 
   depends_on = [
     proxmox_vm_qemu.kworker,
@@ -84,4 +84,12 @@ resource "local_file" "ansible_hosts_masters" {
     }
   )
   filename = "${path.module}/ansible/hosts"
+
+}
+
+output "ansible_inventory" {
+  depends_on = [
+    local_file.ansible_hosts
+  ]
+  value = local_file.ansible_hosts.content
 }
