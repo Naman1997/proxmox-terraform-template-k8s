@@ -33,6 +33,8 @@ full_clone = true
 guest_agent_ready_timeout = 60
 <!-- SSH port for all VMs -->
 ansible_port = 22,
+<!-- Boot Order -->
+order=scsi0;ide2;net0
 ```
 
 **CLONE_TEMPLATE should be present before proceed further**
