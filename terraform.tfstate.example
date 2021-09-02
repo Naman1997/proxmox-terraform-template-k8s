@@ -1,6 +1,0 @@
-PROXMOX_API_ENDPOINT = "https://{{IP:PORT}}/api2/json"
-PROXMOX_USERNAME = "root@pam"
-PROXMOX_PASSWORD = "{{PASSWORD}}"
-DEFAULT_BRIDGE = "vmbr0"
-CLONE_TEMPLATE = "{{Clone name}}"
-TEMPLATE_USERNAME = "{{Username}}"
