@@ -95,3 +95,8 @@ variable "NAMESERVER" {
   description = "Default nameserver that you might want to configure for all your VMs"
   type        = string
 }
+
+variable "BOOT_ORDER" {
+  description = "Boot Order to use when booting all cloned VMs"
+  type        = string
+}
