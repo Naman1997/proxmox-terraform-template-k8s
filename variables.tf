@@ -7,6 +7,7 @@ variable "kmaster_config" {
     memory      = number
     sockets     = number
     cores       = number
+    count       = number
   })
   default = {
     target_node = "pve"
@@ -14,6 +15,7 @@ variable "kmaster_config" {
     memory      = 8192
     sockets     = 1
     cores       = 4
+    count       = 1
   }
 }
 
@@ -25,6 +27,7 @@ variable "kworker_config" {
     memory      = number
     sockets     = number
     cores       = number
+    count       = number
   })
   default = {
     target_node = "pve"
@@ -32,6 +35,7 @@ variable "kworker_config" {
     memory      = 4096
     sockets     = 1
     cores       = 2
+    count       = 2
   }
 }
 
@@ -47,18 +51,6 @@ variable "common_configs" {
     network_model = "e1000"
     disk_type     = "sata"
   }
-}
-
-variable "kmaster_count" {
-  description = "Number of kmaster nodes"
-  type        = number
-  default     = 1
-}
-
-variable "kworker_count" {
-  description = "Number of kworker nodes"
-  type        = number
-  default     = 2
 }
 
 variable "PROXMOX_API_ENDPOINT" {

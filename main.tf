@@ -16,7 +16,7 @@ provider "proxmox" {
 
 # Setting up kmaster nodes
 resource "proxmox_vm_qemu" "kmaster" {
-  count                     = var.kmaster_count
+  count                     = var.kmaster_config.count
   name                      = format("kmaster%s", count.index)
   desc                      = format("Master node in k8s cluster.")
   os_type                   = "cloud-init"
@@ -41,7 +41,7 @@ resource "proxmox_vm_qemu" "kmaster" {
 
 # Setting up kworker nodes
 resource "proxmox_vm_qemu" "kworker" {
-  count                     = var.kworker_count
+  count                     = var.kworker_config.count
   name                      = format("kworker%s", count.index)
   desc                      = format("Worker node in k8s cluster.")
   os_type                   = "cloud-init"
