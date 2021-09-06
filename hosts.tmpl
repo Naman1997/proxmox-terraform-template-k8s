@@ -6,3 +6,7 @@ ${node_hostname} ansible_host=${node_host} ansible_port=${ansible_port} ansible_
 %{ for node_host, node_hostname in node_map_workers ~}
 ${node_hostname} ansible_host=${node_host} ansible_port=${ansible_port} ansible_user=${ansible_user}
 %{endfor}
+[nfs]
+%{ for node_host, node_hostname in node_map_nfs ~}
+${node_hostname} ansible_host=${node_host} ansible_port=${ansible_port} ansible_user=${ansible_user}
+%{endfor}
