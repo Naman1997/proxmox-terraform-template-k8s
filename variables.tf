@@ -115,3 +115,8 @@ variable "BOOT_ORDER" {
   description = "Boot Order to use when booting all cloned VMs"
   type        = string
 }
+
+variable "NFS_ENABLE" {
+  description = "Boolean flag set to create an NFS server"
+  type        = bool
+}

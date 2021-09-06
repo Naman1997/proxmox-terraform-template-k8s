@@ -65,7 +65,7 @@ resource "proxmox_vm_qemu" "kworker" {
 }
 
 resource "proxmox_vm_qemu" "nfs" {
-  count                     = 1
+  count                     = var.NFS_ENABLE ? 1 : 0
   name                      = "nfs-server"
   desc                      = "NFS node in k8s cluster."
   os_type                   = "cloud-init"
