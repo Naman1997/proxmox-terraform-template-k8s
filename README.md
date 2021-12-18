@@ -62,3 +62,6 @@ ansible-inventory -v --list -i ansible/hosts
 ```
 
 You can update 'hosts.tmpl' if you prefer some other format for your ansible inventory.
+
+## Terraform Graph
+![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
