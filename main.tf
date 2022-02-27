@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"
-      version = "2.7.4"
+      version = "2.9.6"
     }
   }
 }
@@ -28,7 +28,6 @@ resource "proxmox_vm_qemu" "kmaster" {
   memory                    = var.kmaster_config.memory
   sockets                   = var.kmaster_config.sockets
   cores                     = var.kmaster_config.cores
-  guest_agent_ready_timeout = 60
   nameserver                = var.NAMESERVER
   boot                      = var.BOOT_ORDER
 
@@ -53,7 +52,6 @@ resource "proxmox_vm_qemu" "kworker" {
   memory                    = var.kworker_config.memory
   sockets                   = var.kworker_config.sockets
   cores                     = var.kworker_config.cores
-  guest_agent_ready_timeout = 60
   nameserver                = var.NAMESERVER
   boot                      = var.BOOT_ORDER
 
@@ -77,7 +75,6 @@ resource "proxmox_vm_qemu" "nfs" {
   memory                    = var.nfs_config.memory
   sockets                   = var.nfs_config.sockets
   cores                     = var.nfs_config.cores
-  guest_agent_ready_timeout = 60
   nameserver                = var.NAMESERVER
   boot                      = var.BOOT_ORDER
 
