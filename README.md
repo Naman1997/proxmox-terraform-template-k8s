@@ -2,19 +2,15 @@
  
  [![Terraform](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml/badge.svg)](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml)
 
-Template for setting up VMs for a k8s cluster on a Proxmox node.
+## Objective of this repo
 
-Also creates a handy ansible inventory in ansible/hosts.
+To create a template terraform script that is able to create VMs for a k8s cluster along with an optional VM for NFS. The script also outputs a handy ansible inventory in 'ansible/hosts' that the user can use to run ansible playbooks after terraform is done creating the VMs.
 
-This repo is using the telmate/proxmox provider for terraform.
-
-Refer the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file.
+This repo is using the telmate/proxmox provider for terraform.Refer the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file.
 
 ## Prerequisite
 
-You need to create a template VM for the cloning process.
-
-Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template).
+You need to create a template VM for the cloning process. Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template).
 
 If you don't need any modifications on top of your base image, then you can create a new VM that uses an official cloud image from [ubuntu](https://cloud-images.ubuntu.com/), [arch](https://wiki.archlinux.org/title/Arch_Linux_on_a_VPS#Official_Arch_Linux_cloud_image), etc and use that VM as a template.
 
@@ -48,6 +44,7 @@ full_clone = true
 ansible_port = 22
 ```
 
+The ansible inventory follows a template that is provided in file 'hosts.tmpl'. You can update that template if you prefer some other format for your ansible inventory.
 
 ## Create the VMs
 ```
@@ -58,7 +55,6 @@ terraform apply
 ```
 
 This will also create an ansible inventory file in './ansible/hosts'.
-You can update 'hosts.tmpl' if you prefer some other format for your ansible inventory.
 
 ## Terraform Graph
 ![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
