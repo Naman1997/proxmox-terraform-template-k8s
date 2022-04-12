@@ -29,8 +29,6 @@ The variables mentioned below are hard-coded in main.tf as I don't think most pe
 pm_tls_insecure = true
 <!-- Full cloning for all VMs -->
 full_clone = true
-<!-- This one is explained below in 'Extra configs' section -->
-guest_agent_ready_timeout = 60
 <!-- SSH port for all VMs -->
 ansible_port = 22
 ```
