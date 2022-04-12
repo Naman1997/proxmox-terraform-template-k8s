@@ -33,7 +33,7 @@ vim terraform.tfvars
 Description for all vars in file 'terraform.tfvars' is available in file 'variables.tf'.
 Apart from the variables mentioned above you can also edit other variables in file 'variables.tf'.
 
-The variables mentioned below are hard-coded in file 'main.tf' as I don't think most people would move away from these defaults. Please update file 'main.tf' if you need other defaults.
+The variables mentioned below are hard-coded in file 'main.tf' as I don't think most people would move away from these defaults. Please update file 'main.tf' if you need different defaults.
 
 ```
 <!-- Proxmox TLS check -->
@@ -43,8 +43,6 @@ full_clone = true
 <!-- SSH port for all VMs -->
 ansible_port = 22
 ```
-
-The ansible inventory follows a template that is provided in file 'hosts.tmpl'. You can update that template if you prefer some other format for your ansible inventory.
 
 ## Create the VMs
 ```
