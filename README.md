@@ -4,9 +4,9 @@
 
 ## Objective of this repo
 
-To create a template terraform script that is able to create VMs for a k8s cluster along with an optional VM for NFS. The script also outputs a handy ansible inventory in 'ansible/hosts' that the user can use to run ansible playbooks after terraform is done creating the VMs.
+To create a template terraform script that is able to create VMs for a k8s cluster along with an optional VM for NFS. The script also outputs a handy ansible inventory in './ansible/hosts' that can be used to run ansible playbooks after terraform is done creating the VMs.
 
-This repo is using the telmate/proxmox provider for terraform.Refer the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file.
+This repo is using the telmate/proxmox provider for terraform. Refer the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file.
 
 ## Prerequisite
 
@@ -55,6 +55,9 @@ terraform apply
 ```
 
 This will also create an ansible inventory file in './ansible/hosts'.
+
+## Deploy k8s on VMs running arch linux [Optional]
+If you decide to use arch linux as your OS for these VMs, then check out [cluster-management](https://github.com/Naman1997/cluster-management). This repo is a collection of playbooks to install a k8s cluster for arch linux.
 
 ## Terraform Graph
 ![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
