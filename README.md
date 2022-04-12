@@ -8,7 +8,21 @@ Also creates a handy ansible inventory in ansible/hosts.
 
 This repo is using the telmate/proxmox provider for terraform.
 
-Make sure to read the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file
+Refer the [documentation](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs) to understand all the variables being used in the variables.tf file.
+
+## Prerequisite
+
+You need to create a template VM for the cloning process.
+
+Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template).
+
+If you don't need any modifications on top of your base image, then you can create a new VM that uses an official cloud image from [ubuntu](https://cloud-images.ubuntu.com/), [arch](https://wiki.archlinux.org/title/Arch_Linux_on_a_VPS#Official_Arch_Linux_cloud_image), etc and use that VM as a template.
+
+You can also follow one of the guides below to create a template VM:
+- My [repo](https://github.com/Naman1997/arch-cloud-image) for setting up a modified arch linux cloud image using packer
+- Telmate's [ISO builder](https://github.com/Telmate/terraform-ubuntu-proxmox-iso)
+
+Once this template is ready, the name of the VM should go in variable CLONE_TEMPLATE in 'terraform.tfvars' file.
 
 ## Important variables to update
 
@@ -17,9 +31,10 @@ You can make this file by copying terraform.tfvars.example and updating the valu
 ```
 cp terraform.tfvars.example terraform.tfvars
 # Edit this file and save it
+# Make sure to update CLONE_TEMPLATE as discussed in the previous section
 vim terraform.tfvars
 ```
-Description for all vars in terraform.tfvars is available in 'variables.tf' file
+Description for all vars in terraform.tfvars is available in 'variables.tf' file.
 Apart from the variables mentioned above you can also edit other variables in 'variables.tf' file.
 
 The variables mentioned below are hard-coded in main.tf as I don't think most people would move away from these defaults. Please update main.tf if you need other defaults.
@@ -33,13 +48,6 @@ full_clone = true
 ansible_port = 22
 ```
 
-**CLONE_TEMPLATE should be configured before creating the VMs**
-
-Learn more about how to create a template [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template)
-
-You can also follow one of the guides below to create a template VM:
-- My [repo](https://github.com/Naman1997/arch-cloud-image) for setting up an arch cloud image
-- Telmate's [ISO builder](https://github.com/Telmate/terraform-ubuntu-proxmox-iso)
 
 ## Create the VMs
 ```
@@ -49,11 +57,7 @@ terraform plan
 terraform apply
 ```
 
-This will also create an ansible inventory file. You can check if its formatted correctly by
-```
-ansible-inventory -v --list -i ansible/hosts
-```
-
+This will also create an ansible inventory file in './ansible/hosts'.
 You can update 'hosts.tmpl' if you prefer some other format for your ansible inventory.
 
 ## Terraform Graph
