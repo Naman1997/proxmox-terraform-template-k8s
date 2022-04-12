@@ -18,7 +18,7 @@ You can also follow one of the guides below to create a template VM:
 - My [repo](https://github.com/Naman1997/arch-cloud-image) for setting up a modified arch linux cloud image using packer
 - Telmate's [ISO builder](https://github.com/Telmate/terraform-ubuntu-proxmox-iso)
 
-Once this template is ready, the name of the VM should go in variable CLONE_TEMPLATE in 'terraform.tfvars' file.
+Once this template is ready, the name of the template should go in variable CLONE_TEMPLATE in 'terraform.tfvars' file.
 
 ## Important variables to update
 
@@ -57,7 +57,7 @@ terraform apply
 This will also create an ansible inventory file in './ansible/hosts'.
 
 ## Deploy k8s on VMs running arch linux [Optional]
-If you decide to use arch linux as your OS for these VMs, then check out [cluster-management](https://github.com/Naman1997/cluster-management). This repo is a collection of playbooks to install a k8s cluster for arch linux.
+If you decided to use arch linux as your OS for these VMs, then check out [cluster-management](https://github.com/Naman1997/cluster-management). This repo is a collection of playbooks that can deploy a k8s cluster on top of VMs running arch linux.
 
 ## Terraform Graph
 ![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
