@@ -1,4 +1,4 @@
-﻿# proxmox-terraform-template-k8s
+# proxmox-terraform-template-k8s
  
  [![Terraform](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml/badge.svg)](https://github.com/Naman1997/terraform-k8s-template/actions/workflows/terraform.yml)
 
