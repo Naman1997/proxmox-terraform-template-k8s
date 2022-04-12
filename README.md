@@ -10,7 +10,7 @@ This repo is using the telmate/proxmox provider for terraform. Refer to the [doc
 
 ## Prerequisite
 
-You need to create a template VM for the cloning process. Learn more about proxmox templates [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template).
+You need to create a proxmox template for the cloning process. Learn more about proxmox templates [here](https://pve.proxmox.com/wiki/VM_Templates_and_Clones#Create_VM_Template).
 
 If you don't need any modifications on top of your base image, then you can create a new VM that uses an official cloud image from [ubuntu](https://cloud-images.ubuntu.com/), [arch](https://wiki.archlinux.org/title/Arch_Linux_on_a_VPS#Official_Arch_Linux_cloud_image), etc and use that VM as a template.
 
