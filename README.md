@@ -43,11 +43,6 @@ You can also follow one of the guides below to create a template VM:
 - My [repo](https://github.com/Naman1997/arch-cloud-image) for setting up an arch cloud image
 - Telmate's [ISO builder](https://github.com/Telmate/terraform-ubuntu-proxmox-iso)
 
-## Extra configs
-There are some params that are not mentioned in the docs. Look [here](https://github.com/Telmate/terraform-provider-proxmox/blob/master/proxmox/resource_vm_qemu.go) to learn more.
-
-One of the params that we're using is 'guest_agent_ready_timeout', its been set to '60' as it speeds up the creation of VMs this way. Look at this [issue](https://github.com/Telmate/terraform-provider-proxmox/issues/325) to learn more.
-
 ## Create the VMs
 ```
 terraform init
