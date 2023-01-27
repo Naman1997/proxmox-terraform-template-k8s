@@ -55,8 +55,8 @@ terraform apply
 
 This will also create an ansible inventory file in './ansible/hosts'.
 
-## Deploy k8s on VMs running arch linux [Optional]
-If you decided to use arch linux as your OS for these VMs, then check out [cluster-management](https://github.com/Naman1997/cluster-management). This repo is a collection of playbooks that can deploy a k8s cluster on top of VMs running arch linux.
+## Deploy k8s [Optional]
+This repo is mainly for maintaining a template that I can copy code from. If you're looking to use my actual homelab setup, checkout (simple-fcos-cluster)[https://github.com/Naman1997/simple-fcos-cluster]. It uses a terraform modules instead of a simple main.tf file as used in this repo to create VMs in proxmox.
 
 ## Terraform Graph
 ![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
