@@ -56,7 +56,7 @@ terraform apply
 This will also create an ansible inventory file in './ansible/hosts'.
 
 ## Deploy k8s [Optional]
-This repo is mainly for maintaining a template that I can copy code from. If you're looking to use my actual homelab setup, checkout [simple-fcos-cluster](https://github.com/Naman1997/simple-fcos-cluster). It uses a terraform modules instead of a simple main.tf file as used in this repo to create VMs in proxmox.
+This repo is mainly for maintaining a template that I can copy code from. If you're looking to use my actual homelab setup, checkout [simple-talos-cluster](https://github.com/Naman1997/simple-talos-cluster). It uses a terraform modules instead of a simple main.tf file as used in this repo to create VMs in proxmox.
 
 ## Terraform Graph
 ![alt text](https://raw.githubusercontent.com/Naman1997/proxmox-terraform-template-k8s/main/Graph.JPG)
